@@ -8,6 +8,7 @@ attr_reader :name, :player_hand
     @player_hand = []
    end
 
+ 
 
 
 end
