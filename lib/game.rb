@@ -1,4 +1,6 @@
 require_relative 'player'
+require_relative 'card'
+
 class Game
   attr_reader :player1, :player2, :array, :player_lost
 
