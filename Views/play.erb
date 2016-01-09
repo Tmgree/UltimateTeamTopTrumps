@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+body  {
+background: url("file://img/0120.img") repeat;
+}
+</style>
+</head>
+
+<body>
+<%= @game.player1.name %> Vs. <%= @game.player2.name %>
+
+<br>
+<%= @game.array[0].name %>: <%= @game.array[0].hp %>
+<br>
+<%= @game.array[1].name %>: <%= @game.array[1].hp %>
+<form action="/attack">
+  <input type="submit" value="Attack"/>
+</form>
+
+</body>
+</html>
