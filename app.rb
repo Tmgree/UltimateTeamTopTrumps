@@ -1,7 +1,8 @@
 require 'sinatra/base'
 require './lib/player'
 require './lib/game'
-
+require "./lib/card"
+require "./lib/card_list"
 
 
 class Battle < Sinatra::Base
@@ -12,8 +13,9 @@ class Battle < Sinatra::Base
     erb(:index)
   end
   post '/names' do
-    puts "#{params[:player1]} #{params[:player2]}"
-    $game=Game.new(Player.new(params[:player1]), Player.new(params[:player2]))
+    card_list = Card_list.new
+    card_list.create_cards
+    $game=Game.new(Player.new(params[:player1], card_list.card_array), Player.new(params[:player2], card_list.card_array))
     redirect('/play')
   end
 
@@ -21,7 +23,7 @@ class Battle < Sinatra::Base
     @game=$game
 
     erb(:play)
-  
+
   end
 
 
@@ -29,20 +31,19 @@ class Battle < Sinatra::Base
   get '/attack' do
     @game=$game
     @game.attack(@game.array[1])
-    #if @game.game_over?
-      #erb(:game_over)
-    #else
+
     erb(:attack)
-  #end
+
   end
 
-  post '/names' do
-    p params
-    player1 = Player.new(params[:player1])
-    player2 = Player.new(params[:player2])
-    $game = Game.new(player1, player2)
-    redirect '/play'
-  end
+  # post '/names' do
+  #   p params
+  #
+  #   player1 = Player.new(params[:player1],card_list.card_array)
+  #   player2 = Player.new(params[:player2],card_list.card_array)
+  #   $game = Game.new(player1, player2)
+  #   redirect '/play'
+  # end
 
 
 
